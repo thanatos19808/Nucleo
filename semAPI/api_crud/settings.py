@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'allauth.socialaccount',
     'multiselectfield',
-    'movies',
+    'semin',
 ]
 
 # Sitio default

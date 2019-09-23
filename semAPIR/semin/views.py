@@ -1,39 +1,39 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
-from .models import Movie
+from .models import *
 from .permissions import IsOwnerOrReadOnly, IsAuthenticated
-from .serializers import MovieSerializer
+from .serializers import *
 from .pagination import CustomPagination
 
-class get_delete_update_movie(RetrieveUpdateDestroyAPIView):
-    serializer_class = MovieSerializer
+class get_delete_update_paciente(RetrieveUpdateDestroyAPIView):
+    serializer_class = PacienteSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly,)
 
     def get_queryset(self, pk):
         try:
-            movie = Movie.objects.get(pk=pk)
-        except Movie.DoesNotExist:
+            paciente = Paciente.objects.get(pk=pk)
+        except Paciente.DoesNotExist:
             content = {
                 'status': 'Not Found'
             }
             return Response(content, status=status.HTTP_404_NOT_FOUND)
-        return movie
+        return paciente
 
-    # Get a movie
+    # Get a Paciente
     def get(self, request, pk):
 
-        movie = self.get_queryset(pk)
-        serializer = MovieSerializer(movie)
+        paciente = self.get_queryset(pk)
+        serializer = PacienteSerializer(paciente)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # Update a movie
+    # Update a Paciente
     def put(self, request, pk):
         
-        movie = self.get_queryset(pk)
+        paciente = self.get_queryset(pk)
 
-        if(request.user == movie.creator): # If creator is who makes request
-            serializer = MovieSerializer(movie, data=request.data)
+        if(request.user == paciente.creator): # If creator is who makes request
+            serializer = PacienteSerializer(paciente, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -44,13 +44,13 @@ class get_delete_update_movie(RetrieveUpdateDestroyAPIView):
             }
             return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 
-    # Delete a movie
+    # Delete a Paciente
     def delete(self, request, pk):
 
-        movie = self.get_queryset(pk)
+        paciente = self.get_queryset(pk)
 
-        if(request.user == movie.creator): # If creator is who makes request
-            movie.delete()
+        if(request.user == paciente.creator): # If creator is who makes request
+            paciente.delete()
             content = {
                 'status': 'NO CONTENT'
             }
@@ -62,25 +62,25 @@ class get_delete_update_movie(RetrieveUpdateDestroyAPIView):
             return Response(content, status=status.HTTP_401_UNAUTHORIZED)
    
 
-class get_post_movies(ListCreateAPIView):
-    serializer_class = MovieSerializer
+class get_post_pacientes(ListCreateAPIView):
+    serializer_class = PacienteSerializer
     permission_classes = (IsAuthenticated,)
     pagination_class = CustomPagination
     
     def get_queryset(self):
-       movies = Movie.objects.all()
-       return movies
+       pacientes = Paciente.objects.all()
+       return pacientes
 
-    # Get all movies
+    # Get all Pacientes
     def get(self, request):
-        movies = self.get_queryset()
-        paginate_queryset = self.paginate_queryset(movies)
+        pacientes = self.get_queryset()
+        paginate_queryset = self.paginate_queryset(pacientes)
         serializer = self.serializer_class(paginate_queryset, many=True)
         return self.get_paginated_response(serializer.data)
 
-    # Create a new movie
+    # Create a new Paciente
     def post(self, request):
-        serializer = MovieSerializer(data=request.data)
+        serializer = PacienteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(creator=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
