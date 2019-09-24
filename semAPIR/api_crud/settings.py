@@ -59,7 +59,7 @@ SITE_ID = 1
 #Registro simple sin correo
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #Login con correo
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 #Following is added to enable registration with email instead of username

@@ -14,8 +14,14 @@ class EmployeeInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (EmployeeInline,)
 
+class PacienteAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Paciente
+
 
 admin.site.site_header = 'PANEL DE CONTROL SEMIN SERVER'
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.register(Paciente, PacienteAdmin)
+
 

@@ -16,4 +16,6 @@ class UserSerializer(serializers.ModelSerializer):  # create class to serializer
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'paciente')
+        fields = "__all__"
+#        fields = ('id', 'username', 'email', 'id_sem', 'tipo', 'titulo')
+

@@ -50,7 +50,12 @@ class CustomLoginView(LoginView):
 
         custom_response = {"user": {
             "username": self.user.username,
-            "email": self.user.email
+            "email": self.user.email,
+            "first_name": self.user.first_name,
+            "last_name": self.user.last_name,
+            "id_sem": self.user.profile.id_sem,
+            "tipo":self.user.profile.tipo,
+            "titulo": self.user.profile.titulo,
         }}
         
         orginal_response.data.update(custom_response)
