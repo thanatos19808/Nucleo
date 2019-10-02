@@ -1,17 +1,25 @@
 from rest_framework import serializers
-from .models import Paciente
+from .models import *
 from django.contrib.auth.models import User
 
 
-class PacienteSerializer(serializers.ModelSerializer):  # create class to serializer model
+class PacienteSerializer(serializers.ModelSerializer):  
     creator = serializers.ReadOnlyField(source='creator.username')
 
     class Meta:
         model = Paciente
-        fields = ('title', 'genre', 'year', 'creator')
+        fields = "__all__"
 
 
-class UserSerializer(serializers.ModelSerializer):  # create class to serializer usermodel
+class ExpedienteSerializer(serializers.ModelSerializer):  
+
+    class Meta:
+        model = Expediente
+        fields = "__all__"
+
+
+
+class UserSerializer(serializers.ModelSerializer):  
     paciente = serializers.PrimaryKeyRelatedField(many=True, queryset=Paciente.objects.all())
 
     class Meta:

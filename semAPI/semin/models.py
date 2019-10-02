@@ -160,7 +160,7 @@ class Paciente(models.Model):
     fecha_registro = models.DateField(null=True, blank=True)
     creacion = models.DateTimeField(auto_now_add=True) # When it was create
     ultimaActualizacion = models.DateTimeField(auto_now=True) # When i was update
-    creator = models.ForeignKey('auth.User', related_name='semin', on_delete=models.CASCADE)
+    editors = models.ManyToManyField('auth.User', related_name='pacientes', blank=True)
 
     def __str__(self):
         return '%s %s %s' % (self.nombre, self.apellido_paterno, self.apellido_materno)
@@ -182,7 +182,7 @@ class Expediente(models.Model):
         verbose_name_plural = "Pacientes - Expedientes"
 
 
-class Estudios(models.Model):
+class Estudio(models.Model):
     fechaEstudio = models.DateField(null=True, blank=True)
     tipoEstudio = models.CharField(max_length=90, null=True, blank=True)
     urlEstudio = models.CharField(max_length=200, null=True, blank=True)
@@ -253,10 +253,10 @@ class HorarioSucursal(models.Model):
         return '%s, %s ,%s ,%s' % (self.dia, self.hora_inicio, self.hora_final, self.Sucursal.nombreSucursal)
 
     class Meta:
-        verbose_name_plural = "Semin - Sucursales"
+        verbose_name_plural = "Semin - Sucursales - Horario de Sucursal"
 
 
-class Cita(models.Model):
+class CitaSucursal(models.Model):
     fecha_cita = models.DateField(null=True, blank=False)
     titulo = models.CharField(max_length=45,null=True, blank=False)
     descripcion = models.CharField(max_length=1000,null=True, blank=True)
@@ -288,10 +288,10 @@ class Catalogo(models.Model):
     ISSSTEPAtlixco = models.FloatField(null=True, blank=False)
     creacion = models.DateTimeField(auto_now_add=True) # When it was create
     ultimaActualizacion = models.DateTimeField(auto_now=True) # When i was update
-    Cita = models.ManyToManyField(Cita, blank=True)
+    CitaSucrusal = models.ManyToManyField(CitaSucursal, blank=True)
 
     def __str__(self):
-        return '%s, %s, %s, %s, %s' % (self.area, self.Sucursal.prueba, self.precioVenta, self.DIFPue, self.ISSSTEPAtlixco)
+        return '%s, %s, %s, %s, %s' % (self.area, self.prueba, self.precioVenta, self.DIFPue, self.ISSSTEPAtlixco)
 
     class Meta:
         verbose_name_plural = "Semin - Catálogo de Estudios"
