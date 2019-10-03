@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
+from django.db.models.functions import Lower
+
 from .models import *
 
 # Define an inline admin descriptor for Employee model
@@ -68,12 +70,20 @@ class SucursalAdmin(admin.ModelAdmin):
         model = Sucursal
 
 
-class DisponibilidadServiciosAdmin(admin.ModelAdmin):
-    list_display = ["tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
-    search_fields = ["tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
+class DisponibilidadServicioAdmin(admin.ModelAdmin):
+    list_display = ["Nombre__Sucursal", "tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
+    search_fields = ["Nombre__Sucursal", "tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
+
+#FRONT
+
+    def get_ordering(self, request):
+        return [Lower('Sucursal__nombreSucursal')]
+
+    def Nombre__Sucursal(self, instance):
+        return instance.Sucursal.nombreSucursal
 
     class Meta:
-        model = DisponibilidadServicios
+        model = DisponibilidadServicio
 
 
 class HorarioSucursalAdmin(admin.ModelAdmin):
@@ -122,7 +132,7 @@ admin.site.register(Expediente, ExpedienteAdmin)
 admin.site.register(Estudio, EstudioAdmin)
 admin.site.register(Sucursal, SucursalAdmin)
 admin.site.register(HorarioSucursal, HorarioSucursalAdmin)
-admin.site.register(DisponibilidadServicios, DisponibilidadServiciosAdmin)
+admin.site.register(DisponibilidadServicio, DisponibilidadServicioAdmin)
 admin.site.register(CitaSucursal, CitaSucursalAdmin)
 admin.site.register(Catalogo, CatalogoAdmin)
 admin.site.register(Promocion, PromocionAdmin)

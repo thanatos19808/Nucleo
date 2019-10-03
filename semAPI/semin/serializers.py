@@ -4,11 +4,10 @@ from django.contrib.auth.models import User
 
 
 class PacienteSerializer(serializers.ModelSerializer):  
-    creator = serializers.ReadOnlyField(source='creator.username')
 
     class Meta:
         model = Paciente
-        fields = "__all__"
+        fields = ('id','nombre','apellido_paterno','apellido_materno','sexo','fecha_nacimiento','tipo_sangre','curp','entidad_nacimiento','entidad','nivel_socioeconomico','tipo_vivienda','discapacidad','grupoEtnico','religion','ocupacion','tipoDomicilio','calle','colonia','num_interior','num_exterior','cp','municipio','localidad','estado','telefonoCasa','telefonoOficina','telefonoCelular','email','fecha_registro')
 
 
 class ExpedienteSerializer(serializers.ModelSerializer):  
@@ -17,6 +16,33 @@ class ExpedienteSerializer(serializers.ModelSerializer):
         model = Expediente
         fields = "__all__"
 
+
+class HorarioSucursalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = HorarioSucursal
+        fields = "__all__"
+
+
+class EstudioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Estudio
+        fields = "__all__"
+
+
+class SucursalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Sucursal
+        fields = "__all__"
+
+
+class DisponibilidadServicioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DisponibilidadServicio
+        fields = "__all__"
 
 
 class UserSerializer(serializers.ModelSerializer):  

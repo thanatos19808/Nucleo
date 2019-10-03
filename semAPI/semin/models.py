@@ -187,17 +187,17 @@ class Estudio(models.Model):
     tipoEstudio = models.CharField(max_length=90, null=True, blank=True)
     urlEstudio = models.CharField(max_length=200, null=True, blank=True)
     notasEstudio = models.CharField(max_length=500, null=True, blank=True)
-    Expediente = models.ForeignKey(Expediente, null=True, blank=False, on_delete=models.CASCADE)
+    Paciente = models.ForeignKey(Paciente, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s %s %s %s' % (self.fechaEstudio, self.tipoEstudio, self.Expediente.Paciente.nombre, self.Expediente.Paciente.apellido_paterno, self.Expediente.Paciente.apellido_materno)
+        return '%s %s %s %s %s' % (self.fechaEstudio, self.tipoEstudio, self.Paciente.nombre, self.Paciente.apellido_paterno, self.Paciente.apellido_materno)
 
     class Meta:
         verbose_name_plural = "Pacientes - Estudios"
 
 
 class Sucursal(models.Model):
-    nombreSucursal = models.CharField(max_length=90,null=True, blank=True)
+    nombreSucursal = models.CharField(max_length=90,null=True, blank=False)
     descripcion = models.CharField(max_length=200,null=True, blank=True)
     calle = models.CharField(max_length=90, null=True, blank=True)
     colonia = models.CharField(max_length=45,null=True, blank=True)
@@ -218,7 +218,7 @@ class Sucursal(models.Model):
         verbose_name_plural = "Semin - Sucursales"
 
 
-class DisponibilidadServicios(models.Model):
+class DisponibilidadServicio(models.Model):
     tomaMuestras = models.BooleanField(default=False,null=True, blank=True)
     ultrasonografia = models.BooleanField(default=False,null=True, blank=True)
     rayosX = models.BooleanField(default=False,null=True, blank=True)
