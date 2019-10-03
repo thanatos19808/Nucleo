@@ -18,6 +18,19 @@ class ExpedienteSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class SucursalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Sucursal
+        fields = "__all__"
+
+
+class DisponibilidadServicioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DisponibilidadServicio
+        fields = "__all__"
+
 
 class UserSerializer(serializers.ModelSerializer):  
     paciente = serializers.PrimaryKeyRelatedField(many=True, queryset=Paciente.objects.all())

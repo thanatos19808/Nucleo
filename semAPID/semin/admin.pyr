@@ -69,10 +69,10 @@ class SucursalAdmin(admin.ModelAdmin):
 
 
 class DisponibilidadServicioAdmin(admin.ModelAdmin):
-    list_display = ["Nombre__Sucursal", "tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
-    search_fields = ["Nombre__Sucursal", "tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
+    list_display = ["sucursal__nombreSucursal", "tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
+    search_fields = ["sucursal__nombreSucursal", "tomaMuestras", "ultrasonografia", "rayosX", "rayosXContrastados", "mastografia", "patologia", "electrocardiograma", "tomografia", "resonanciaMagnetica"]
 
-    def Nombre__Sucursal(self, instance):
+    def sucursal__nombreSucursal(self, instance):
         return instance.Sucursal.nombreSucursal
 
     class Meta:
