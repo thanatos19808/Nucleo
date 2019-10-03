@@ -106,15 +106,20 @@ http http://127.0.0.1:8000/api/v1/examples/?page=3&page_size=15 "Authorization: 
 ### API List Paciente
 URL |GET | GET ALL | POST | PUT | DELETE
 -- | -- |-- |-- |-- |-- 
-api/v1/paciente/paciente/ |X |X |X |X |X
-api/v1/paciente/expediente/ |X |X |X |X |X
-api/v1/paciente/sucursal/ |X |X |X |X |X
-api/v1/paciente/disponibilidadServ/ | | | | |X
-api/v1/paciente/estudio/ |X |X |X |X |X
-api/v1/paciente/horarioSucursal/ |X |X |X |X |X
+api/v1/paciente/paciente/ |YES |NO |YES |YES |NO
+api/v1/paciente/expediente/ |SI |SI (Return only one) |NO |NO |NO
+api/v1/paciente/sucursal/ |YES |YES |NO |NO |NO
+api/v1/paciente/disponibilidadServ/ |YES |YES |NO |NO |NO
+api/v1/paciente/estudio/ |YES |YES |NO |NO |NO
+api/v1/paciente/horarioSucursal/ |YES |YES |NO |NO |NO
 
+
+### Login
+```
 rest-auth/login/
 rest-auth/registration/
 rest-auth/
+```
+
 
 
