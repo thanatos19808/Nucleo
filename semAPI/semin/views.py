@@ -88,12 +88,14 @@ class get_post_pacientes(ListCreateAPIView):
         }
         return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 
-    # Create a new paciente
+
+    # Create a new Paciente
     def post(self, request):
-        content = {
-                'status': 'UNAUTHORIZED'
-        }
-        return Response(content, status=status.HTTP_401_UNAUTHORIZED)
+        serializer = PacienteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class get_delete_update_expediente(RetrieveUpdateDestroyAPIView):
