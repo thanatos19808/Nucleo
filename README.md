@@ -1,3 +1,5 @@
+Si te sirve este API de DJANGO tomalo con gusto.
+
 # SIMPLE CRUD API WITH DJANGO REST FRAMEWORK
 [Django REST framework](http://www.django-rest-framework.org/) is a powerful and flexible toolkit for building Web APIs.
 
